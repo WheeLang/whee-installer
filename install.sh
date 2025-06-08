@@ -60,18 +60,27 @@ SOFTWARE_SELECTION=$(zenity --list --checklist \
 --title="Select Software" \
 --width=500 --height=300 \
 --column "Install" --column "Component" --column "Description" \
-TRUE "whee" "Whee Script Runner" \
-TRUE "wheec" "Whee to Rust converter" \
-TRUE "wcc" "Whee Compiler to Binary")
+TRUE "whee" "Whee Script Runner (required)" \
+TRUE "wheec" "Whee to Rust converter (required)" \
+FALSE "wcc" "Whee Compiler to Binary")
 
 abort_if_failed $? "Installation cancelled by user."
 
 print_title "Installing selected software"
 
+# Enforce required components
+ENFORCED_SELECTION="whee|wheec"
+IFS="|" read -ra TEMP_SELECTED <<< "$SOFTWARE_SELECTION"
+for soft in "${TEMP_SELECTED[@]}"; do
+    if [[ "$soft" != "whee" && "$soft" != "wheec" ]]; then
+        ENFORCED_SELECTION+="|$soft"
+    fi
+done
+
 # ========== STAGE 3: Install ==========
 print_title "3: Install"
 
-IFS="|" read -ra SELECTED <<< "$SOFTWARE_SELECTION"
+IFS="|" read -ra SELECTED <<< "$ENFORCED_SELECTION"
 TOTAL=${#SELECTED[@]}
 COUNT=0
 
@@ -129,4 +138,3 @@ if [ $? -ne 0 ]; then
 fi
 
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
-
