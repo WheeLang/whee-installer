@@ -60,9 +60,7 @@ SOFTWARE_SELECTION=$(zenity --list --checklist \
 --title="Select Software" \
 --width=500 --height=300 \
 --column "Install" --column "Component" --column "Description" \
-TRUE "whee" "Whee Script Runner (required)" \
-TRUE "wheec" "Whee to Rust converter (required)" \
-FALSE "wcc" "Whee Compiler to Binary")
+TRUE "wcc" "Whee Compiler to Binary")
 
 abort_if_failed $? "Installation cancelled by user."
 
