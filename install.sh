@@ -128,5 +128,5 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-zenity --info --text="Installation complete!\nTry running:  whee yourfile.wh"
+zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
 
