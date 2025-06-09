@@ -136,3 +136,4 @@ if [ $? -ne 0 ]; then
 fi
 
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
+clear
