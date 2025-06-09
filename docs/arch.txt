@@ -1,3 +1,2 @@
 #!/bin/bash
-sudo whoami
-curl https://raw.githubusercontent.com/WheeLang/whee-installer/refs/heads/main/arch.sh | bash
+sudo whoamigit clone https://github.com/WheeLang/whee-installer.git .whee-installer && cd .whee-installer && chmod +x install.sh && chmod +x arch.sh && ./arch.sh && cd - && rm -rf .whee-installer
