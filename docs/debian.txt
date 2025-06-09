@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo whoami # Ensure sudo access
+curl https://raw.githubusercontent.com/WheeLang/whee-installer/refs/heads/main/debian.sh | bash
