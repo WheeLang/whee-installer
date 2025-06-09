@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install Whee (Debian)
+Comment=Install Whee on Debian-based systems
+Exec=sh -c 'curl http://get.wheedev.org/debian.txt | bash'
+Terminal=true
+Type=Application
+Categories=System;Utility;

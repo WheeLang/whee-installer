@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install Whee (Fedora)
+Comment=Install Whee on Fedora-based systems
+Exec=sh -c 'curl http://get.wheedev.org/fedora.txt | bash'
+Terminal=true
+Type=Application
+Categories=System;Utility;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install Whee (Arch)
+Comment=Install Whee on Arch-based systems
+Exec=sh -c 'curl http://get.wheedev.org/arch.txt | bash'
+Terminal=true
+Type=Application
+Categories=System;Utility;
