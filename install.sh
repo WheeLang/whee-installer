@@ -119,7 +119,7 @@ done
 # Final step: download syntax.json
 echo "100"
 echo "# Downloading syntax.json..."
-curl -L "$SYNTAX_URL" -o "$INSTALL_DIR/syntax.json" >/dev/null 2>&1
+sudo curl -L "$SYNTAX_URL" -o "$INSTALL_DIR/syntax.json" >/dev/null 2>&1
 ) |
 zenity --progress \
   --title="Installing Whee Software" \
