@@ -1,2 +1,3 @@
 #!/bin/bash
-sudo whoamigit clone https://github.com/WheeLang/whee-installer.git .whee-installer && cd .whee-installer && chmod +x install.sh && chmod +x arch.sh && ./arch.sh && cd - && rm -rf .whee-installer
+sudo whoami
+git clone https://github.com/WheeLang/whee-installer.git .whee-installer && cd .whee-installer && chmod +x install.sh && chmod +x arch.sh && ./arch.sh && cd - && rm -rf .whee-installer
