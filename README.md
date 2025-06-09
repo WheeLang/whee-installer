@@ -20,8 +20,8 @@ Easily install `whee`, `wheec` and `wcc` with a few clicks.
 ## Usage
 
 ```bash
-git clone https://github.com/WheeLang/whee-installer.git
-cd whee-installer
+git clone https://github.com/WheeLang/whee-installer.git .whee-installer
+cd .whee-installer
 chmod +x install.sh
 ./install.sh
 ```
