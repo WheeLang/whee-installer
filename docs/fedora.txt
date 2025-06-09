@@ -1,3 +1,3 @@
 #!/bin/bash
 sudo whoami
-curl https://raw.githubusercontent.com/WheeLang/whee-installer/refs/heads/main/fedora.sh | bash
+git clone https://github.com/WheeLang/whee-installer.git .whee-installer && cd .whee-installer && chmod +x install.sh && chmod +x fedora.sh && ./fedora.sh && cd - && rm -rf .whee-installer
