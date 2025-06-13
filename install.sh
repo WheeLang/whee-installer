@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# ========== CONFIG ==========
-REPO="https://github.com/WheeLang/whee"
-SYNTAX_URL="https://raw.githubusercontent.com/WheeLang/whee/main/syntax.json"
-INSTALL_DIR="/opt/bitey/Whee"
-BIN_DIR="/usr/bin"
-TMP_DIR="/tmp/whee_installer"
-
 # ========== UTILITIES ==========
 function print_title {
     echo
@@ -15,12 +8,43 @@ function print_title {
     echo "=============================="
 }
 
+
 function abort_if_failed {
     if [ $1 -ne 0 ]; then
         zenity --error --text="$2"
         exit 1
     fi
 }
+
+# ========== CONFIG ==========
+REPO="https://github.com/WheeLang/whee"
+SYNTAX_URL="https://raw.githubusercontent.com/WheeLang/whee/main/syntax.json"
+INSTALL_DIR="/opt/bitey/Whee"
+BIN_DIR="/usr/bin"
+TMP_DIR="/tmp/whee_installer"
+TEMP_USERNAME=$(whoami)
+
+# ========== USER AND GROUP SETUP ==========
+print_title "Setting up system users and permissions"
+
+# Create chocobitey group if it doesn't exist
+if ! getent group chocobitey >/dev/null; then
+    sudo groupadd chocobitey
+fi
+
+# Add current user and root to chocobitey group
+sudo usermod -aG chocobitey "$TEMP_USERNAME"
+sudo usermod -aG chocobitey root
+
+# Create _bitey user if it doesn't exist
+if ! id -u _bitey >/dev/null 2>&1; then
+    sudo useradd -r -s /usr/sbin/nologin -g chocobitey _bitey
+fi
+
+# Ensure /opt/bitey exists and has correct ownership and permissions
+sudo mkdir -p /opt/bitey
+sudo chown -R _bitey:chocobitey /opt/bitey
+sudo chmod -R 770 /opt/bitey
 
 # ========== STAGE 0 ==========
 zenity --info --width=300 --title="Whee Installer" \
