@@ -159,5 +159,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+sudo chown _bitey:chocobitey /opt/bitey/Whee
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
 clear
