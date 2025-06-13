@@ -114,7 +114,7 @@ for soft in "${SELECTED[@]}"; do
         whee)
             echo "$PERCENT"
             echo "# Downloading whee..."
-            curl -L "$DOWNLOAD_URL" -o "$TMP_DIR/whee" >/dev/null 2>&1
+            curl -L --progress "$DOWNLOAD_URL" -o "$TMP_DIR/whee"
             sudo cp "$TMP_DIR/whee" "$INSTALL_DIR/"
             sudo chmod +x "$INSTALL_DIR/whee"
             sudo ln -sf "$INSTALL_DIR/whee" "$BIN_DIR/whee"
@@ -122,7 +122,7 @@ for soft in "${SELECTED[@]}"; do
         wheec)
             echo "$PERCENT"
             echo "# Downloading wheec..."
-            curl -L "$WHEEC_URL" -o "$TMP_DIR/wheec" >/dev/null 2>&1
+            curl -L --progress "$WHEEC_URL" -o "$TMP_DIR/wheec"
             sudo cp "$TMP_DIR/wheec" "$INSTALL_DIR/"
             sudo chmod +x "$INSTALL_DIR/wheec"
             sudo ln -sf "$INSTALL_DIR/wheec" "$BIN_DIR/wheec"
@@ -130,7 +130,7 @@ for soft in "${SELECTED[@]}"; do
         wcc)
             echo "$PERCENT"
             echo "# Downloading wcc..."
-            curl -L "$WCC_URL" -o "$TMP_DIR/wcc" >/dev/null 2>&1
+            curl -L --progress "$WCC_URL" -o "$TMP_DIR/wcc" >/dev/null 2>&1
             sudo cp "$TMP_DIR/wcc" "$INSTALL_DIR/"
             sudo chmod +x "$INSTALL_DIR/wcc"
             sudo ln -sf "$INSTALL_DIR/wcc" "$BIN_DIR/wcc"
