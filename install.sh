@@ -160,5 +160,6 @@ if [ $? -ne 0 ]; then
 fi
 
 sudo chown _bitey:chocobitey /opt/bitey/Whee
+sudo chmod 771 /opt/bitey/Whee
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
 clear
