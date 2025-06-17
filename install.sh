@@ -18,7 +18,7 @@ function abort_if_failed {
 
 # ========== CONFIG ==========
 REPO="https://github.com/WheeLang/whee"
-SYNTAX_URL="https://raw.githubusercontent.com/WheeLang/whee/main/syntax.json"
+SYNTAX_URL="https://raw.githubusercontent.com/WheeLang/index/main/docs/syntax@latest/syntax.json"
 INSTALL_DIR="/opt/bitey/Whee"
 BIN_DIR="/usr/bin"
 TMP_DIR="/tmp/whee_installer"
