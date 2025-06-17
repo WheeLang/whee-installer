@@ -140,6 +140,51 @@ for soft in "${SELECTED[@]}"; do
     COUNT=$((COUNT + 1))
 done
 
+print_title "Installing Bitey Package Manager (Required)"
+
+# Step 1: Fetch the latest Bitey release from GitHub
+echo "→ Fetching Bitey release info..."
+BITEY_RELEASE_JSON=$(curl -s "https://api.github.com/repos/Chocobitey/bitey/releases/latest")
+BITEY_BINARY_URL=$(echo "$BITEY_RELEASE_JSON" | jq -r '.assets[] | select(.name == "bitey") | .browser_download_url')
+
+abort_if_failed $? "Failed to fetch Bitey release info."
+
+# Step 2: Create /opt/bitey/bin directory
+echo "→ Preparing /opt/bitey/bin..."
+sudo mkdir -p /opt/bitey/bin
+
+# Step 3: Download and place the bitey binary
+echo "→ Downloading Bitey binary..."
+curl -L --progress-bar "$BITEY_BINARY_URL" -o "$TMP_DIR/bitey"
+abort_if_failed $? "Failed to download Bitey binary."
+
+sudo cp "$TMP_DIR/bitey" /opt/bitey/bin/bitey
+
+# Step 4: Set ownership and permissions
+sudo chown -R _bitey:chocobitey /opt/bitey/bin
+sudo chmod -R 771 /opt/bitey/bin
+
+# Step 5 & 6: Create core directories
+echo "→ Creating Chocobitey and Chocolaterie directories..."
+sudo mkdir -p /opt/bitey/Chocobitey/remotes
+sudo mkdir -p /opt/bitey/Chocolaterie
+
+# Step 7: Download remote.yml for 'main' remote
+echo "→ Installing default remote: main"
+sudo mkdir -p /opt/bitey/Chocobitey/remotes/main
+sudo curl -L --progress-bar \
+  "https://raw.githubusercontent.com/Chocobitey/remote-main/refs/heads/main/remote.yml" \
+  -o /opt/bitey/Chocobitey/remotes/main/remote.yml
+abort_if_failed $? "Failed to download default remote.yml"
+
+# Step 8: Make bitey executable
+sudo chmod +x /opt/bitey/bin/bitey
+
+# Optional: symlink to /usr/bin
+sudo ln -sf /opt/bitey/bin/bitey /usr/bin/bitey
+
+echo "✓ Bitey installed at /opt/bitey/bin/bitey"
+
 # Final step: download syntax.json
 echo "100"
 echo "# Downloading syntax.json..."
