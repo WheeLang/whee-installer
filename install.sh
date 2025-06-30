@@ -184,11 +184,6 @@ sudo chmod +x /opt/bitey/bin/bitey
 sudo ln -sf /opt/bitey/bin/bitey /usr/bin/bitey
 
 echo "✓ Bitey installed at /opt/bitey/bin/bitey"
-
-# Final step: download syntax.json
-echo "100"
-echo "# Downloading syntax.json..."
-sudo curl -L --progress-bar "$SYNTAX_URL" -o "$INSTALL_DIR/syntax.json"
 ) |
 zenity --progress \
   --title="Installing Whee Software" \
@@ -204,7 +199,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-sudo chown _bitey:chocobitey /opt/bitey/Whee
-sudo chmod 771 /opt/bitey/Whee
+sudo chown _bitey:chocobitey /opt/bitey/**
+sudo chmod 771 /opt/bitey/**
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
 clear
