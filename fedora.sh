@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo dnf install curl jq zenity rustc cargo
+sudo dnf install curl jq zenity gcc
 ./install.sh
