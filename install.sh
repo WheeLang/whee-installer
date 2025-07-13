@@ -140,18 +140,18 @@ for soft in "${SELECTED[@]}"; do
     COUNT=$((COUNT + 1))
 done
 
-print_title "Installing Bitey Package Manager (Required)"
+print_title "Installing BitPuppy Package Manager (Required)"
 
 # Step 1: Fetch the latest Bitey release from GitHub
-echo "→ Fetching Bitey release info..."
-BITEY_RELEASE_JSON=$(curl -s "https://api.github.com/repos/Chocobitey/bitey/releases/latest")
+echo "→ Fetching BitPuppy release info..."
+BITEY_RELEASE_JSON=$(curl -s "https://api.github.com/repos/Chocobitpup/bitpuppy/releases/latest")
 BITEY_BINARY_URL=$(echo "$BITEY_RELEASE_JSON" | jq -r '.assets[] | select(.name == "bitey") | .browser_download_url')
 
-abort_if_failed $? "Failed to fetch Bitey release info."
+abort_if_failed $? "Failed to fetch BitPuppy release info."
 
-# Step 2: Create /opt/bitey/bin directory
-echo "→ Preparing /opt/bitey/bin..."
-sudo mkdir -p /opt/bitey/bin
+# Step 2: Create /opt/bitpuppy/bin directory
+echo "→ Preparing /opt/bitpuppy/bin..."
+sudo mkdir -p /opt/bitpuppy/bin
 
 # Step 3: Download and place the bitey binary
 echo "→ Downloading Bitey binary..."
@@ -161,29 +161,29 @@ abort_if_failed $? "Failed to download Bitey binary."
 sudo cp "$TMP_DIR/bitey" /opt/bitey/bin/bitey
 
 # Step 4: Set ownership and permissions
-sudo chown -R _bitey:chocobitey /opt/bitey/bin
-sudo chmod -R 771 /opt/bitey/bin
+sudo chown -R _bitey:chocobitey /opt/bitpuppy/bin
+sudo chmod -R 771 /opt/bitpuppy/bin
 
 # Step 5 & 6: Create core directories
 echo "→ Creating Chocobitey and Chocolaterie directories..."
-sudo mkdir -p /opt/bitey/Chocobitey/remotes
-sudo mkdir -p /opt/bitey/Chocolaterie
+sudo mkdir -p /opt/bitpuppy/Chocobitpup/remotes
+sudo mkdir -p /opt/bitpuppy/Chocolaterie
 
 # Step 7: Download remote.yml for 'main' remote
 echo "→ Installing default remote: main"
-sudo mkdir -p /opt/bitey/Chocobitey/remotes/main
+sudo mkdir -p /opt/bitpuppy/Chocobitpup/remotes/main
 sudo curl -L --progress-bar \
   "https://raw.githubusercontent.com/Chocobitey/remote-main/refs/heads/main/remote.yml" \
-  -o /opt/bitey/Chocobitey/remotes/main/remote.yml
+  -o /opt/bitpuppy/Chocobitpup/remotes/main/remote.yml
 abort_if_failed $? "Failed to download default remote.yml"
 
 # Step 8: Make bitey executable
-sudo chmod +x /opt/bitey/bin/bitey
+sudo chmod +x /opt/bitpuppy/bin/bitpup
 
 # Optional: symlink to /usr/bin
-sudo ln -sf /opt/bitey/bin/bitey /usr/bin/bitey
+sudo ln -sf /opt/bitpuppy/bin/bitpup /usr/bin/bitpup
 
-echo "✓ Bitey installed at /opt/bitey/bin/bitey"
+echo "✓ Bitey installed at /opt/bitpuppy/bin/bitpup"
 ) |
 zenity --progress \
   --title="Installing Whee Software" \
@@ -199,7 +199,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-sudo chown _bitey:chocobitey /opt/bitey/**
-sudo chmod 771 /opt/bitey/**
+sudo chown _bitey:chocobitey /opt/bitpuppy/**
+sudo chmod 771 /opt/bitpuppy/**
 zenity --info --title="Success" --text="Installation complete!\nTry running:  whee yourfile.wh"
 clear
